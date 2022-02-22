@@ -5,11 +5,7 @@ WORKDIR /stremio
 ARG VERSION=master
 
 RUN apk add --no-cache wget ffmpeg
-RUN wget http://dl.strem.io/four/${VERSION}/server.js
-RUN wget http://dl.strem.io/four/${VERSION}/stremio.asar
-
-VOLUME ["/root/.stremio-server"]
-
-EXPOSE 11470
+RUN wget -q http://dl.strem.io/four/${VERSION}/stremio.asar
+COPY server.js .
 
 ENTRYPOINT [ "node", "server.js" ]
